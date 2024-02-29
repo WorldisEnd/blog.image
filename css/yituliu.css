@@ -1,26 +1,50 @@
-/* 文章页背景 */
-.layout_post>#post {
-    /* 以下代表透明度为0.5 可以自行修改*/
-    background: rgba(255,255,255,.5);
-}
-/* 页脚透明 */
-#footer{
-  background: transparent!important;
-}
-/* 头图透明 */
-#page-header{
-  background: transparent!important;
-}
-/*top-img黑色透明玻璃效果移除，不建议加，除非你执着于完全一图流或者背景图对比色明显 */
-#page-header.post-bg:before {
-  background-color: transparent!important;
-}
-/*夜间模式伪类遮罩层透明*/
-[data-theme="dark"]
-  #footer::before{
-      background: transparent!important;
-    }
-[data-theme="dark"]
-  #page-header::before{
-    background: transparent!important;
-    }
+@import 'nib'
+
+// 顶部图
+#page-header
+  &, &:before
+    background: transparent !important
+  &.post-bg, &.not-home-page
+    height: 280px !important
+  #post-info
+    bottom: 40px !important
+  #page-site-info
+    top: 140px !important
+
+  @media screen and (max-width: 768px)
+    &.not-home-page
+      height: 200px !important
+    #post-info
+      bottom: 10px !important
+    #page-site-info
+      top: 100px !important
+
+.top-img
+  height: 250px
+  margin: -50px -40px 50px
+  border-top-left-radius: inherit
+  border-top-right-radius: inherit
+  background-position: center center
+  background-size: cover
+  transition: all 0.3s
+
+  @media screen and (max-width: 768px)
+    height: 230px
+    margin: -36px -14px 36px
+
+  [data-theme='dark'] &
+    filter: brightness(0.8)
+
+// 页脚
+#footer:before
+  background-color: alpha(#FFF, .5)
+
+  [data-theme='dark'] &
+    background-color: alpha(#000, .5)
+
+#footer-wrap, #footer-wrap a
+  color: #111
+  transition: unset
+
+  [data-theme='dark'] &
+    color: var(--light-grey)
